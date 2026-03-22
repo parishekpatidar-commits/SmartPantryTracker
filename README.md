@@ -9,6 +9,7 @@ A premium SaaS-style full-stack application to track pantry items, manage invent
 - **Database**: MongoDB (Mongoose ORM)
 - **Security**: NoSQL Injection Protection (express-mongo-sanitize), JWT Authentication
 
+
 ## ✨ Key Features
 
 - **Premium UI/UX**: Clean dashboard with modern spacing, typography, and hover effects.

@@ -20,16 +20,23 @@ const seed = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ Connected to MongoDB');
 
-    // Create default admin
-    let admin = await User.findOne({ username: 'Pardeap' });
+    // Create default admin from environment variables or use defaults
+    const adminUsername = process.env.ADMIN_USERNAME;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (!adminUsername || !adminPassword) {
+      throw new Error("Missing ADMIN_USERNAME or ADMIN_PASSWORD in environment variables");
+    }
+
+    let admin = await User.findOne({ username: adminUsername });
     if (!admin) {
       admin = await User.create({
-        name: 'Pardeap Admin',
-        username: 'Pardeap',
-        password: '20@26',
+        name: adminUsername,
+        username: adminUsername,
+        password: adminPassword,
         role: 'admin',
       });
-      console.log('👤 Default admin created — username: Pardeap');
+      console.log(`👤 Default admin created — username: ${adminUsername}`);
     } else {
       console.log('👤 Admin user already exists, skipping...');
     }
